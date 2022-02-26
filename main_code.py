@@ -1,6 +1,8 @@
 if __name__ == '__main__':
     import telebot
     from config import API
+    from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+
 
     bot = telebot.TeleBot(API)
     chapter_controller = {}
@@ -8,7 +10,7 @@ if __name__ == '__main__':
 
     @bot.message_handler(commands=['start'])
     def start_message(message):
-        bot.send_message(message.from_user.id, '''Привествую вас в виртуальной симуляции "Hartswood". Начнем игру.''')
+        bot.send_message(message.from_user.id, '''Привествую вас в виртуальной симуляции "Hartswood". Начнем игру?''')
         user_id = message.from_user.id
         chapter_controller[user_id] = 'chapter1Acquaintance'
 
@@ -23,7 +25,7 @@ if __name__ == '__main__':
         bot.send_message(message.from_user.id, '''Джон, что это за идиотские картинки?''')
 
 
-    @bot.message_handler()
+    @bot.message_handler(content_types='text')
     def start(message):
         user_id = message.from_user.id
         user_chapter = chapter_controller.get(user_id, 'start')
@@ -42,8 +44,7 @@ if __name__ == '__main__':
         Вы заинтересовались и продолжаете наблюдать за ними. Какая странная пара - один с тростью, короткой прической, 
         обычными чертами лица, среднего роста, выглядит спокойным. 
         Второй высокий, с темными, слегка кудрявыми волосами, явно чем-то взволнованный.  
-        -Шерлок, кажется, за нами пристально наблюдают…
-''')
+        -Шерлок, кажется, за нами пристально наблюдают…''')
 
 
     bot.polling()
