@@ -17,6 +17,7 @@ if __name__ == '__main__':
             return cls._instance
 
 
+
     bot = telebot.TeleBot(API)
     chapter_controller = Master.get_instance()
 
